@@ -2,7 +2,7 @@ name: "Push Export"
 on:
   push:
     branches:
-      - main
+      # - main
       # - dev
 env:
   GODOT_VERSION: 3.4
