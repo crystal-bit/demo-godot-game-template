@@ -2,6 +2,7 @@ name: "Push Export"
 on:
   push:
     branches:
+      - release
       # - main
       # - dev
 env:
