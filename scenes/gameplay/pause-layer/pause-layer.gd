@@ -3,16 +3,9 @@ extends CanvasLayer
 onready var pause := $Pause
 onready var pause_button := $PauseButton
 onready var resume_option := $Pause/VBoxOptions/Resume
-onready var label := $PressESCToOpenMenu
 
 func _ready():
-	if OS.has_touchscreen_ui_hint():
-		label.visible = false
-	else:
-		# to hide the pause_button on desktop: un-comment the next line
-		# pause_button.hide()
-		pass
-
+	pass
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
