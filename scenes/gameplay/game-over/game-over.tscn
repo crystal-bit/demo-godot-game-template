@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/gameplay/ui-theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/gameplay/game-over/game-over.gd" type="Script" id=2]
+
+[node name="GameOver" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0588235, 0.0588235, 0.0588235, 0.486275 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -117.0
+margin_top = -150.0
+margin_right = 117.0
+margin_bottom = -12.0
+custom_constants/separation = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOver" type="Label" parent="ColorRect/VBoxContainer"]
+margin_right = 234.0
+margin_bottom = 39.0
+text = "GAME OVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]
+margin_top = 99.0
+margin_right = 234.0
+margin_bottom = 138.0
+
+[node name="Score" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer"]
+margin_right = 214.0
+margin_bottom = 39.0
+text = "YOUR SCORE IS: "
+
+[node name="Value" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer"]
+margin_left = 218.0
+margin_right = 234.0
+margin_bottom = 39.0
+text = "0"
+
+[node name="Button" type="Button" parent="ColorRect/VBoxContainer"]
+margin_top = 198.0
+margin_right = 234.0
+margin_bottom = 243.0
+text = "RESTART"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/Button" to="." method="_on_Button_pressed"]

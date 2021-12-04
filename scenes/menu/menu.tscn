@@ -19,7 +19,7 @@ script/source = "extends Label
 func _ready():
 	rect_pivot_offset = rect_size / 2
 
-func _process(delta):
+func _process(_delta):
 	rect_rotation = -20 - 20 * sin(2.0 * PI * 0.0007 *  OS.get_ticks_msec())
 "
 
@@ -54,12 +54,12 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="CenterContainer"]
-margin_left = 123.0
-margin_top = 86.0
-margin_right = 901.0
-margin_bottom = 174.0
+margin_left = 222.0
+margin_top = 426.0
+margin_right = 497.0
+margin_bottom = 514.0
 custom_fonts/font = ExtResource( 1 )
-text = "Godot Game Template"
+text = "SH_OO_T"
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/space/star.gd" type="Script" id=1]
+[ext_resource path="res://assets/puzzle/particleSmallStar.png" type="Texture" id=2]
+
+[node name="Star" type="Sprite3D" groups=["scroll_objects"]]
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+aabb = AABB( -0.358793, -0.374246, -0.391079, 0.717586, 0.748493, 0.782158 )
