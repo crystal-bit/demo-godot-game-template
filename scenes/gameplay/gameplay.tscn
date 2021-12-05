@@ -26,9 +26,12 @@ script = ExtResource( 5 )
 
 [node name="Spatial" type="Spatial" parent="."]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Spaceship" parent="Spatial" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, -1.56462e-07, 1, 0, -1, -1.56462e-07, 0, 0, 0.267422 )
+transform = Transform( 1, 0, 0, 0, -1.56462e-07, 1, 0, -1, -1.56462e-07, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.793 )

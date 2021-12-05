@@ -3,38 +3,79 @@ class_name Spaceship
 
 onready var bullet_scene = preload("res://objects/spaceship/bullet/bullet.tscn")
 onready var gameplay = get_node("../../")
-var speed = 10
+onready var camera: Camera = get_node("../Camera")
+
+# input
+var current_input = "keyboard"
+var last_pointer_pos = Vector2()
+var pointer_pressed = false
+# movement
+var y_speed = 10
 var x_speed = 8
+# fire
 var cooldown = 0.06 # s
 var cooldown_timer = 0 # s
-var movement = Vector2()
 
 signal destroyed
 
 
 func _process(delta):
-	movement = Vector2()
-	if Input.is_action_pressed("ui_left"):
-		movement.x = -delta * x_speed
-	if Input.is_action_pressed("ui_right"):
-		movement.x = delta * x_speed
+	# movement
+	var movement = Vector2()
+	movement = get_movement(movement)
+	movement *= delta
 
-	translation.x += movement.x
+	translation.x += movement.x * x_speed
 	translation.x = clamp(translation.x, gameplay.top_left.x, gameplay.bot_right.x)
-
-	if Input.is_action_pressed("ui_down"):
-		movement.y = -delta * speed
-	if Input.is_action_pressed("ui_up"):
-		movement.y = speed * delta
-
-	translation.y += movement.y
+	translation.y += movement.y * y_speed
 	translation.y = clamp(translation.y, gameplay.bot_right.y, gameplay.top_left.y)
-
-	if Input.is_action_pressed("fire"):
+	# fire
+	if (current_input == "mouse" and pointer_pressed) or (Input.is_action_pressed("fire")):
 		if cooldown_timer <= 0:
 			fire()
 			cooldown_timer = cooldown
 		cooldown_timer -= delta
+
+
+func get_movement(movement: Vector2) -> Vector2:
+	movement.x = 0
+	movement.y = 0
+	if current_input == "keyboard":
+		if Input.is_action_pressed("ui_left"):
+			movement.x = -1
+		if Input.is_action_pressed("ui_right"):
+			movement.x = 1
+		if Input.is_action_pressed("ui_down"):
+			movement.y = -1
+		if Input.is_action_pressed("ui_up"):
+			movement.y = 1
+		return movement.normalized()
+	elif current_input == "mouse":
+		if pointer_pressed:
+			return calculate_point(last_pointer_pos).normalized()
+		return Vector2()
+	else:
+		return Vector2()
+
+
+func _input(event):
+	if event is InputEventKey:
+		current_input = "keyboard"
+	if event is InputEventMouseButton:
+		current_input = "mouse"
+		pointer_pressed = event.pressed
+	if event is InputEventMouseMotion:
+		if pointer_pressed:
+			last_pointer_pos = event.position
+
+
+func calculate_point(p: Vector2) -> Vector2:
+	var spaceship_screen_position = camera.unproject_position(self.translation)
+	var movement = p - spaceship_screen_position
+	if movement.length() < 20:
+		return Vector2()
+	movement.y = -movement.y
+	return movement
 
 
 func fire():
