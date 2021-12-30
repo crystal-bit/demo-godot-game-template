@@ -36,6 +36,7 @@ transform = Transform( 1, 0, 0, 0, -1.56462e-07, 1, 0, -1, -1.56462e-07, 0, 0, 0
 [node name="Camera" type="Camera" parent="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.793 )
 current = true
+near = 1.0
 
 [node name="Enemies" type="Node" parent="Spatial"]
 script = ExtResource( 4 )
@@ -45,6 +46,10 @@ script = ExtResource( 4 )
 [node name="Meteors" type="Node" parent="Spatial"]
 script = ExtResource( 10 )
 meteor_scene = ExtResource( 11 )
+
+[node name="Stars" type="Node" parent="Spatial"]
+script = ExtResource( 6 )
+star = ExtResource( 7 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Spatial"]
 transform = Transform( -0.965926, -0.14275, -0.215893, 0.0195546, -0.872013, 0.489093, -0.258079, 0.468206, 0.845091, 3.6961, 4.66017, 7.60912 )
@@ -63,37 +68,43 @@ shape = SubResource( 7 )
 [node name="CollisionShape" type="CollisionShape" parent="Spatial/StaticBody"]
 shape = SubResource( 7 )
 
-[node name="Stars" type="Node" parent="Spatial"]
-script = ExtResource( 6 )
-star = ExtResource( 7 )
-
-[node name="GUI" type="Control" parent="."]
+[node name="GUI" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 64
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 64
 script = ExtResource( 13 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
+[node name="Control" type="Control" parent="GUI"]
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 643.0
+margin_bottom = 1136.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Control"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -49.5
-margin_top = 26.0
-margin_right = 49.5
-margin_bottom = 66.0
+margin_left = -57.5
+margin_right = 57.5
+margin_bottom = 39.0
 theme = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Score" type="Label" parent="GUI/HBoxContainer"]
+[node name="Score" type="Label" parent="GUI/Control/HBoxContainer"]
 margin_right = 95.0
 margin_bottom = 39.0
 theme = SubResource( 4 )
 text = "SCORE:"
 
-[node name="Value" type="Label" parent="GUI/HBoxContainer"]
+[node name="Value" type="Label" parent="GUI/Control/HBoxContainer"]
 margin_left = 99.0
 margin_right = 115.0
 margin_bottom = 39.0

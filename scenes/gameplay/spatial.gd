@@ -12,8 +12,10 @@ func _ready():
 		if visibility_notifier:
 			visibility_notifier.connect("camera_exited", self, "on_object_camera_exited", [n])
 
+
 func on_object_camera_exited(camera, node: Spatial):
 	node.translation.y = 20
+
 
 func _process(delta):
 	for node in get_tree().get_nodes_in_group("scroll_objects"):

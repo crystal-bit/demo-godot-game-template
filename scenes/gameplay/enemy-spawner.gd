@@ -1,12 +1,14 @@
 extends Node
 
-onready var enemy_scene = preload("res://objects/enemy/enemy.tscn")
-
 signal enemy_killed
 
+onready var enemy_scene = preload("res://objects/enemy/enemy.tscn")
+onready var timer := $Timer
+
+var spawned_enemies = 0
 
 func _ready():
-	$Timer.start()
+	timer.start()
 
 
 func spawn():
@@ -22,3 +24,7 @@ func on_enemy_killed(enemy):
 
 func _on_Timer_timeout():
 	spawn()
+	spawned_enemies += 1
+	if spawned_enemies % 5 == 0:
+		timer.wait_time *= 0.5
+		timer.wait_time = max(0.15, timer.wait_time)

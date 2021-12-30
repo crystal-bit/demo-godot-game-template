@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/menu/title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/play-button.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/safe-area.gd" type="Script" id=3]
 [ext_resource path="res://scenes/menu/normal.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/menu/credits-font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/menu/version.gd" type="Script" id=6]
@@ -45,6 +46,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SafeArea" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.352941, 0.454902, 0.454902, 0.266667 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -54,26 +64,73 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="CenterContainer"]
-margin_left = 222.0
-margin_top = 426.0
-margin_right = 497.0
-margin_bottom = 514.0
+margin_left = 87.0
+margin_top = 341.0
+margin_right = 587.0
+margin_bottom = 520.0
+rect_min_size = Vector2( 500, 0 )
 custom_fonts/font = ExtResource( 1 )
-text = "SH_OO_T"
+text = "Godot Game template"
+align = 1
+autowrap = true
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="CenterContainer/Title"]
+self_modulate = Color( 0.301961, 0.917647, 0.211765, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -56.5
+margin_top = 105.5
+margin_right = 56.5
+margin_bottom = 150.5
+custom_fonts/font = SubResource( 1 )
+text = " DEMO "
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="CenterContainer/Title/Label"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0705882, 0.184314, 0.113725, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CenterContainer/Title/Label"]
+material = SubResource( 3 )
+position = Vector2( 73, 23 )
+amount = 32
+local_coords = false
+texture = ExtResource( 9 )
+emission_shape = 2
+emission_rect_extents = Vector2( 36, 12 )
+direction = Vector2( 0, -1 )
+spread = 30.0
+gravity = Vector2( 0, 400 )
+initial_velocity = 50.0
+angular_velocity = 100.0
+angular_velocity_random = 0.5
+scale_amount = 2.0
+scale_amount_curve = SubResource( 4 )
+color = Color( 1, 1, 1, 0.117647 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = -34.0
-margin_right = 100.0
-margin_bottom = 130.0
+margin_left = -99.5
+margin_top = 70.0
+margin_right = 100.5
+margin_bottom = 140.0
 custom_constants/separation = 16
 __meta__ = {
 "_edit_use_anchors_": false
@@ -93,10 +150,10 @@ __meta__ = {
 [node name="Version" type="VBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
+margin_left = 32.0
 margin_top = -90.0
 margin_right = 198.0
-margin_bottom = -18.0
+margin_bottom = -32.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -124,8 +181,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -147.0
 margin_top = -90.0
-margin_right = -16.0
-margin_bottom = -16.0
+margin_right = -32.0
+margin_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
 __meta__ = {
@@ -167,45 +224,5 @@ grow_horizontal = 0
 custom_colors/font_color = Color( 0.886275, 0.87451, 0.87451, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "Developer 3"
-
-[node name="Label" type="Label" parent="."]
-self_modulate = Color( 0.301961, 0.917647, 0.211765, 1 )
-margin_left = 754.0
-margin_top = 178.0
-margin_right = 851.0
-margin_bottom = 223.0
-custom_fonts/font = SubResource( 1 )
-text = " DEMO "
-script = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="Label"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.0705882, 0.184314, 0.113725, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Label"]
-material = SubResource( 3 )
-position = Vector2( 73, 23 )
-amount = 32
-local_coords = false
-texture = ExtResource( 9 )
-emission_shape = 2
-emission_rect_extents = Vector2( 36, 12 )
-direction = Vector2( 0, -1 )
-spread = 30.0
-gravity = Vector2( 0, 400 )
-initial_velocity = 50.0
-angular_velocity = 100.0
-angular_velocity_random = 0.5
-scale_amount = 2.0
-scale_amount_curve = SubResource( 4 )
-color = Color( 1, 1, 1, 0.117647 )
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="VBoxContainer/PlayButton" method="_on_Button_pressed"]

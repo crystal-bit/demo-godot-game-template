@@ -10,10 +10,10 @@ var current_input = "keyboard"
 var last_pointer_pos = Vector2()
 var pointer_pressed = false
 # movement
-var y_speed = 10
-var x_speed = 8
+var y_speed = 12
+var x_speed = 12
 # fire
-var cooldown = 0.06 # s
+var cooldown = 0.1 # s
 var cooldown_timer = 0 # s
 
 signal destroyed

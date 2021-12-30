@@ -1,13 +1,12 @@
 extends Node
 
+var top_left: Vector3
+var bot_right: Vector3
+var center: Vector3
 
 # `pre_start()` is called when a scene is loaded.
 # Use this function to receive params from `Game.change_scene(params)`.
 func pre_start(params):
-	print("\ngameplay.gd:pre_start() called with params = ")
-	for key in params:
-		var val = params[key]
-		printt("", key, val)
 	set_process(false)
 	var spaceship = $Spatial/Spaceship
 	var camera = $Spatial/Camera
@@ -16,11 +15,28 @@ func pre_start(params):
 	bot_right = camera.project_position(Vector2(Game.size.x, Game.size.y), d)
 	center = camera.project_position(Vector2(Game.size.x / 2, Game.size.y / 2), d)
 	spaceship.translation = center
+	preload_shaders()
 
 
-var top_left: Vector3
-var bot_right: Vector3
-var center: Vector3
+# TODO: create a separate node for materials preloading
+func preload_shaders():
+	var objs = [
+		preload("res://assets/space/meteor.tscn"),
+		preload("res://objects/spaceship/bullet/bullet.tscn"),
+		preload("res://objects/enemy/enemy.tscn")
+	]
+	var node = Node.new()
+	var i = 0
+	for obj in objs:
+		var n = obj.instance()
+		node.add_child(n)
+		n.translation.y = i * 2
+		i += 1
+	add_child(node)
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	node.queue_free()
+
 
 # `start()` is called when the graphic transition ends.
 func start():
