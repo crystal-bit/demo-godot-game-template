@@ -47,3 +47,5 @@ func _on_Spaceship_destroyed():
 	var gameover = load("res://scenes/gameplay/game-over/game-over.tscn").instance()
 	add_child(gameover)
 	gameover.set_score($GUI.score_value.text)
+	$GUI.queue_free()
+	$PauseLayer.pause_button.hide()
