@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://objects/enemy/enemy.gd"
 }, {
-"base": "Node",
-"class": "Main",
-"language": "GDScript",
-"path": "res://scenes/main/main.gd"
-}, {
 "base": "Spatial",
 "class": "Meteor",
 "language": "GDScript",
@@ -34,10 +29,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/rand_utils/RandUtils.gd"
 }, {
+"base": "Reference",
+"class": "SceneData",
+"language": "GDScript",
+"path": "res://addons/game-template/scenes/scene-data.gd"
+}, {
 "base": "Node",
 "class": "Scenes",
 "language": "GDScript",
-"path": "res://scenes/main/scenes.gd"
+"path": "res://addons/game-template/scenes.gd"
 }, {
 "base": "Spatial",
 "class": "Spaceship",
@@ -52,14 +52,14 @@ _global_script_classes=[ {
 "base": "CanvasLayer",
 "class": "Transition",
 "language": "GDScript",
-"path": "res://scenes/main/transition/transition.gd"
+"path": "res://addons/game-template/transition/transition.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "Enemy": "",
-"Main": "",
 "Meteor": "",
 "RandUtils": "",
+"SceneData": "",
 "Scenes": "",
 "Spaceship": "",
 "Star": "",
@@ -69,7 +69,7 @@ _global_script_class_icons={
 [application]
 
 config/name="demo-godot-game-template"
-run/main_scene="res://scenes/main/main.tscn"
+run/main_scene="res://scenes/menu/menu.tscn"
 boot_splash/image="res://assets/splash.png"
 boot_splash/bg_color=Color( 0.0862745, 0.0862745, 0.0862745, 1 )
 config/icon="res://assets/icon.png"
@@ -77,7 +77,9 @@ config/version="0.0.1"
 
 [autoload]
 
-Game="*res://autoload/game.gd"
+Game="*res://addons/game-template/game.gd"
+Utils="*res://addons/game-template/utils.gd"
+Transitions="*res://addons/game-template/transition/transition.tscn"
 
 [display]
 
@@ -90,7 +92,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/rand_utils/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/game-template/plugin.cfg", "res://addons/rand_utils/plugin.cfg" )
 
 [input]
 

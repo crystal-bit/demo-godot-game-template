@@ -3,7 +3,6 @@
 
 # Godot-specific ignores
 .import/
-android
 
 # Builds/export directory
 builds

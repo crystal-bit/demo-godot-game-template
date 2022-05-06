@@ -18,7 +18,7 @@ func pre_start(params):
 	preload_shaders()
 
 
-# TODO: create a separate node for materials preloading
+# TODO: test it with Godot 3.5
 func preload_shaders():
 	var objs = [
 		preload("res://assets/space/meteor.tscn"),
@@ -40,7 +40,6 @@ func preload_shaders():
 
 # `start()` is called when the graphic transition ends.
 func start():
-	var active_scene: Node = Game.get_active_scene()
 	set_process(true)
 
 

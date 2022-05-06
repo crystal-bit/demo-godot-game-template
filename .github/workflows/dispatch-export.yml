@@ -5,11 +5,11 @@ on:
       godot_version:
         description: "Godot Version"
         required: true
-        default: "3.4"
+        default: "3.4.4"
       export_platform:
         description: "Export Platform - all|windows|linux|web|macos|android"
         required: true
-        default: "android"
+        default: "all"
       export_folder:
         description: "Export Folder - Repository Path"
         required: true
@@ -38,10 +38,10 @@ env:
 jobs:
   export_windows:
     name: Windows Export
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: ${{ github.event.inputs.export_platform == 'windows' || github.event.inputs.export_platform == 'all' }}
     container:
-      image: barichello/godot-ci:3.4
+      image: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -73,10 +73,10 @@ jobs:
 
   export_linux:
     name: Linux Export
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: ${{ github.event.inputs.export_platform == 'linux' || github.event.inputs.export_platform == 'all' }}
     container:
-      image: barichello/godot-ci:3.4
+      image: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -108,10 +108,10 @@ jobs:
 
   export_web:
     name: Web Export
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: ${{ github.event.inputs.export_platform == 'web' || github.event.inputs.export_platform == 'all' }}
     container:
-      image: barichello/godot-ci:3.4
+      image: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -153,10 +153,10 @@ jobs:
 
   export_mac:
     name: Mac Export
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: ${{ github.event.inputs.export_platform == 'macos' || github.event.inputs.export_platform == 'all' }}
     container:
-      image: barichello/godot-ci:3.4
+      image: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -188,10 +188,10 @@ jobs:
 
   export_android:
     name: Android Export
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: ${{ github.event.inputs.export_platform == 'android' || github.event.inputs.export_platform == 'all' }}
     container:
-      image: davcri/godot-game-template-ci:latest
+      image: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -202,7 +202,7 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
           cp /root/.config/godot/editor_settings-3.tres ~/.config/godot/editor_settings-3.tres
           echo 'export/android/debug_keystore = "/root/debug.keystore"' >> ~/.config/godot/editor_settings-3.tres
-          echo 'export/android/android_sdk_path = "/root/android-sdk"' >> ~/.config/godot/editor_settings-3.tres
+          echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-3.tres
       - name: Android Debug Build
         run: |
           cd ${EXPORT_FOLDER}
