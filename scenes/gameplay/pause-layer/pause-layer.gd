@@ -4,8 +4,16 @@ onready var pause := $Pause
 onready var pause_button := $PauseButton
 onready var resume_option := $Pause/VBoxOptions/Resume
 
+
 func _ready():
-	pass
+		pass
+
+
+# when the node is removed from the tree (mostly because of a scene change)
+func _exit_tree() -> void:
+	# disable pause
+	get_tree().paused = false
+
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
